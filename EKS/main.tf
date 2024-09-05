@@ -37,6 +37,12 @@ module "eks" {
 
   cluster_name    = "my-eks-cluster"
   cluster_version = "1.30"
+  cluster_addons = {
+    coredns                = {}
+    eks-pod-identity-agent = {}
+    kube-proxy             = {}
+    vpc-cni                = {}
+  }
 
   cluster_endpoint_public_access  = true
 
@@ -47,7 +53,7 @@ module "eks" {
     node = {
       # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
       
-      instance_type = ["t2.medium"]
+      instance_types = ["t2.medium"]
 
       min_size     = 1
       max_size     = 3
